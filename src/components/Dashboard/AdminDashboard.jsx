@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Users, BookOpen, TrendingUp, Award } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, LineChart, Line, ResponsiveContainer } from 'recharts';
+import { CreateUserModal } from '../Users/CreateUserModal';
+import { CreateSessionModal } from '../Sessions/CreateSessionModal';
 
 const COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#EF4444'];
 
 export function AdminDashboard() {
   const { users, sessions } = useAuth();
+
+  const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+  const [showCreateSessionModal, setShowCreateSessionModal] = useState(false);
 
   const stats = [
     {
@@ -60,6 +65,11 @@ export function AdminDashboard() {
     { name: 'Week 3', engagement: 78 },
     { name: 'Week 4', engagement: 88 }
   ];
+
+  const handleGenerateReport = () => {
+    // Placeholder for report generation or navigation
+    alert('Generate Report button clicked');
+  };
 
   return (
     <div className="space-y-8">
@@ -189,17 +199,40 @@ export function AdminDashboard() {
       <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
         <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition-colors duration-200">
+          <button
+            onClick={() => setShowCreateUserModal(true)}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+          >
             Create New User
           </button>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200">
+          <button
+            onClick={() => setShowCreateSessionModal(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+          >
             Schedule Session
           </button>
-          <button className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-md transition-colors duration-200">
+          <button
+            onClick={handleGenerateReport}
+            className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+          >
             Generate Report
           </button>
         </div>
       </div>
+
+      {showCreateUserModal && (
+        <CreateUserModal
+          onClose={() => setShowCreateUserModal(false)}
+          onSuccess={() => setShowCreateUserModal(false)}
+        />
+      )}
+
+      {showCreateSessionModal && (
+        <CreateSessionModal
+          onClose={() => setShowCreateSessionModal(false)}
+          onSuccess={() => setShowCreateSessionModal(false)}
+        />
+      )}
     </div>
   );
 }
