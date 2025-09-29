@@ -1,4 +1,4 @@
-- [x] Wrap all authenticated routes in ProtectedRoute to enforce password change check
-- [x] Update App.jsx to use ProtectedRoute for dashboard and sessions routes
-- [x] Modify ChangePassword to redirect to dashboard after successful password update
-- [ ] Test the flow: login with temporary password -> forced to change -> access dashboard
+# TODO: Start the Application
+
+- [x] Start the FastAPI backend server on port 8001
+- [x] Start the Vite React frontend development server
