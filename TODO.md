@@ -1,0 +1,4 @@
+- [x] Wrap all authenticated routes in ProtectedRoute to enforce password change check
+- [x] Update App.jsx to use ProtectedRoute for dashboard and sessions routes
+- [x] Modify ChangePassword to redirect to dashboard after successful password update
+- [ ] Test the flow: login with temporary password -> forced to change -> access dashboard
